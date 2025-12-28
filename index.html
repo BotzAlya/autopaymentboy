@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touch NGO Malaysia - Pembayaran</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #8b0000 0%, #b22222 50%, #a52a2a 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        header {
+            background-color: rgba(139, 0, 0, 0.9);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #ffcc00;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            background-color: #fff;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo i {
+            font-size: 40px;
+            color: #b22222;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        
+        .left-section, .right-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffcc00;
+        }
+        
+        .payment-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-item i {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            width: 30px;
+            color: #ffcc00;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 180px;
+        }
+        
+        .info-value {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            flex-grow: 1;
+        }
+        
+        .qr-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 15px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        
+        .qr-placeholder {
+            font-size: 5rem;
+            color: #8b0000;
+            margin-bottom: 10px;
+        }
+        
+        .qr-text {
+            color: #333;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        
+        .payment-button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(to right, #ffcc00, #ffaa00);
+            color: #8b0000;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+        }
+        
+        .payment-button:hover {
+            background: linear-gradient(to right, #ffd633, #ffbb33);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
+        }
+        
+        .payment-button:active {
+            transform: translateY(1px);
+        }
+        
+        .contact-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            background-color: #0088cc;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-button i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-button:hover {
+            background-color: #0099e6;
+            transform: translateY(-3px);
+        }
+        
+        .instructions {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .info-label {
+                margin-bottom: 5px;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <div>
+                    <h1>TOUCH NGO MALAYSIA</h1>
+                    <p class="subtitle">Pembayaran Auto Menggunakan QR Code Nasional Malaysia</p>
+                </div>
+            </div>
+        </header>
+        
+        <div class="content">
+            <div class="left-section">
+                <h2 class="section-title">Maklumat Pembayaran</h2>
+                
+                <div class="payment-info">
+                    <div class="info-item">
+                        <i class="fas fa-hashtag"></i>
+                        <span class="info-label">Nombor Touch NGO:</span>
+                        <span class="info-value" id="ngo-number">100807472080</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-qrcode"></i>
+                        <span class="info-label">Jenis QR Code:</span>
+                        <span class="info-value">Malaysia National QR</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span class="info-label">Cara Pembayaran:</span>
+                        <span class="info-value">Imbas dengan aplikasi perbankan atau eWallet</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-handshake"></i>
+                        <span class="info-label">Tujuan:</span>
+                        <span class="info-value">Pindahan atau bayaran untuk Touch NGO</span>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> Arahan Pembayaran:</h3>
+                    <ol>
+                        <li>Buka aplikasi perbankan atau eWallet di telefon anda</li>
+                        <li>Pilih fungsi "Scan QR Code"</li>
+                        <li>Imbas kod QR di sebelah kanan</li>
+                        <li>Masukkan jumlah bayaran yang dikehendaki</li>
+                        <li>Sahkan pembayaran anda</li>
+                        <li>Simpan resit pembayaran untuk rujukan</li>
+                    </ol>
+                </div>
+                
+                <div class="contact-section">
+                    <h3><i class="fas fa-headset"></i> Perlukan Bantuan?</h3>
+                    <p>Hubungi kami melalui Telegram untuk sebarang pertanyaan</p>
+                    <a href="https://t.me/boyjutawan" target="_blank" class="contact-button">
+                        <i class="fab fa-telegram"></i> t.me/boyjutawan
+                    </a>
+                </div>
+            </div>
+            
+            <div class="right-section">
+                <h2 class="section-title">QR Code Pembayaran</h2>
+                
+                <div class="qr-container">
+                    <div class="qr-code">
+                        <div class="qr-placeholder">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="qr-text">
+                            MALAYSIA NATIONAL QR
+                        </div>
+                    </div>
+                    <p>Imbas dengan aplikasi perbankan atau<br>eWallet anda untuk pindahan atau bayaran.</p>
+                </div>
+                
+                <button class="payment-button" id="pay-button">
+                    <i class="fas fa-bolt"></i> BAYAR SEKARANG
+                </button>
+                
+                <div class="instructions">
+                    <h3><i class="fas fa-shield-alt"></i> Pembayaran Selamat:</h3>
+                    <p>Pembayaran melalui Malaysia National QR adalah selamat dan dilindungi. Pastikan anda hanya menggunakan aplikasi perbankan rasmi atau eWallet yang sah untuk membuat pembayaran.</p>
+                    <p>Touch NGO Malaysia adalah organisasi bukan kerajaan yang berdaftar rasmi. Semua derma akan digunakan untuk program kebajikan masyarakat.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2023 Touch NGO Malaysia. Semua hak cipta terpelihara. | Organisasi Kebajikan Berdaftar: PPM-XXX-YY-ZZZZ</p>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk simulasi pembayaran
+        document.getElementById('pay-button').addEventListener('click', function() {
+            const ngoNumber = document.getElementById('ngo-number').textContent;
+            
+            // Tampilkan dialog simulasi pembayaran
+            alert(`Pembayaran kepada Touch NGO (${ngoNumber})\n\nSila imbas kod QR dengan aplikasi perbankan atau eWallet anda untuk meneruskan pembayaran.\n\nSelepas pembayaran selesai, sila hubungi kami di Telegram untuk pengesahan: t.me/boyjutawan`);
+            
+            // Simulasi pembukaan aplikasi pembayaran
+            console.log("Membuka pembayaran untuk Touch NGO: " + ngoNumber);
+        });
+        
+        // Tambahkan efek visual pada tombol
+        const payButton = document.getElementById('pay-button');
+        payButton.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(1px)';
+        });
+        
+        payButton.addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(-3px)';
+        });
+    </script>
+</body>
+</html>
